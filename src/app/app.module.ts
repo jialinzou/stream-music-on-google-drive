@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { DriveComponent } from './drive/drive.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DriveComponent
   ],
   imports: [
     BrowserModule

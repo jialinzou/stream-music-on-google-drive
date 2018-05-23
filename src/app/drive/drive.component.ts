@@ -9,7 +9,7 @@ declare var gapi: any;
 export class DriveComponent implements OnInit {
   signed: boolean;
   constructor() { 
-    //this.signed = true;
+    this.signed = false;
     console.log('construtor');
   }
 
@@ -33,6 +33,7 @@ export class DriveComponent implements OnInit {
       this.signed = gapi.auth2.getAuthInstance().isSignedIn.get();
       gapi.auth2.getAuthInstance().isSignedIn.listen(
         (isSignedIn) => {
+          console.log(isSignedIn);
           this.signed = isSignedIn;
           if(isSignedIn){
             this.listFiles();
@@ -79,7 +80,7 @@ export class DriveComponent implements OnInit {
       } else {
         this.appendPre('No files found.');
       }
-    }.bind(this);
+    }.bind(this));
   }
 }
 

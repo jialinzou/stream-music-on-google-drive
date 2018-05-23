@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Song } from '../song';
 @Component({
   selector: 'app-player',
@@ -6,8 +6,9 @@ import { Song } from '../song';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
-  @ViewChild('player') player: any;
-  @Input() song: Song;
+  @ViewChild('audioPlayer') audioPlayer: any;
+  @Output() finished = new EventEmitter<boolean>();
+  song: Song;
 
   constructor() { console.log('player constructor'); }
 
@@ -15,9 +16,15 @@ export class PlayerComponent implements OnInit {
     console.log('player init');
   }
 
-  reload(): void {
+  play(song: Song): void {
+    this.song = song;
     console.log(this.song);
-    this.player.load();
-    this.player.play();
+    this.audioPlayer.nativeElement.load();
+    this.audioPlayer.nativeElement.play();
+  }
+
+  ended(): void {
+    console.log('ended');
+    this.finished.emit(true);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Song } from '../song';
 import { SONGS } from '../mock-songs';
@@ -9,6 +9,7 @@ import { SONGS } from '../mock-songs';
   styleUrls: ['./playlist.component.css']
 })
 export class PlaylistComponent implements OnInit {
+  @ViewChild('player') player: any;
   songs: Song[];
   playingSong: Song;
 
@@ -16,6 +17,7 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.songs = SONGS;
+    this.player.play(this.songs[0]);
   }
 
   addSongs(): void {
@@ -26,8 +28,8 @@ export class PlaylistComponent implements OnInit {
     this.songs = this.songs.filter(h => h !== song);
   }
 
-  play(song: Song): void {
-    this.playingSong = song;
-    console.log(this.playingSong);
-  }
+  //play(song: Song): void {
+  //  this.playingSong = song;
+  //  console.log(this.playingSong);
+  //}
 }

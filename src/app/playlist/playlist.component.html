@@ -1,10 +1,10 @@
-<app-player [song]="playingSong"></app-player>
+<app-player #player></app-player>
 <div>
   <button (click)="addSongs()">Add Songs</button>
 
   <ul class="playlist">
     <li *ngFor="let song of songs" 
-      (click)="play(song)" 
+      (click)="player.play(song)" 
       [class.playing]="song == playingSong">
       <a>{{song.name}}</a>
       <button class="delete" title="delete song"

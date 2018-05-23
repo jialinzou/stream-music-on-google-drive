@@ -4,12 +4,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DriveComponent } from './drive/drive.component';
+import { PlayerComponent } from './player/player.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriveComponent
+    DriveComponent,
+    PlayerComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule

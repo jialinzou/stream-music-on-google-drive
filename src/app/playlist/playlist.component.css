@@ -1,0 +1,9 @@
+.playlist li.playing:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+.playlist li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}

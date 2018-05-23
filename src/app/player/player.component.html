@@ -1,0 +1,7 @@
+<div *ngIf='song'>
+  <audio controls autoplay=true #player>
+    <source src={{song.link}}>
+  Your browser does not support the audio element.
+  </audio>
+  <p (change)='reload()'>playing... {{song.name}}</p>
+</div>

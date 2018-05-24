@@ -18,13 +18,11 @@ export class PlayerComponent implements OnInit {
 
   play(song: Song): void {
     this.song = song;
-    console.log(this.song);
     this.audioPlayer.nativeElement.load();
     this.audioPlayer.nativeElement.play();
   }
 
-  ended(): void {
-    console.log('ended');
+  onEnded() {
     this.finished.emit(true);
   }
 }

@@ -28,6 +28,11 @@ export class PlaylistComponent implements OnInit {
     this.songs = this.songs.filter(h => h !== song);
   }
 
+  playRandomSong() {
+    let i: number = Math.floor(Math.random() * this.songs.length);
+    this.playingSong = this.songs[i];
+    this.player.play(this.playingSong);
+  }
   //play(song: Song): void {
   //  this.playingSong = song;
   //  console.log(this.playingSong);

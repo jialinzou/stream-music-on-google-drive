@@ -1,7 +1,7 @@
 <div>
-  <audio controls autoplay=true #audioPlayer onended='ended()'>
+  <audio controls autoplay=true (ended)="onEnded()" #audioPlayer>
     <source src={{song.link}}>
   Your browser does not support the audio element.
   </audio>
-  <p (change)='reload()'>playing... {{song.name}}</p>
+  <p>playing... {{song.name}}</p>
 </div>

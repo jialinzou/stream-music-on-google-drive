@@ -10,11 +10,9 @@ export class DriveComponent implements OnInit {
   signed: boolean;
   constructor() { 
     this.signed = false;
-    console.log('construtor');
   }
 
   ngOnInit() {
-    console.log('init');
     gapi.load('client:auth2', this.initClient.bind(this));
   }
 

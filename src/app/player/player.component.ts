@@ -10,10 +10,9 @@ export class PlayerComponent implements OnInit {
   @Output() finished = new EventEmitter<boolean>();
   song: Song;
 
-  constructor() { console.log('player constructor'); }
+  constructor() {}
 
   ngOnInit() {
-    console.log('player init');
   }
 
   play(song: Song): void {

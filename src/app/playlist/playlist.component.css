@@ -1,9 +1,43 @@
-.playlist li.playing:hover {
-  background-color: #BBD8DC !important;
-  color: white;
+.playlist {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
 }
-.playlist li:hover {
+
+.playlist li {
+  position: relative;
+  left: 0;
+  margin: .5em;
+  padding: .1em 0;
+  height: 1.0em;
+}
+
+.playlist li a:hover {
   color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
+  cursor: pointer;
+}
+
+.playing {
+  color: blue;
+}
+
+button {
+  position: relative;
+  font-size: small;
+  border-radius: 4px;
+}
+
+button:hover {
+  color: white;
+  background-color: lightblue;
+}
+
+button.delete {
+  margin-right: .6em;
+  border-radius: 4px 0 0 4px;
+}
+
+button.delete:hover {
+  color: white;
+  background-color: red;
 }

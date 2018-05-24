@@ -18,6 +18,7 @@ export class PlaylistComponent implements OnInit {
   ngOnInit() {
     this.songs = SONGS;
     this.player.play(this.songs[0]);
+    this.playingSong = this.songs[0];
   }
 
   addSongs(): void {

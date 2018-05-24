@@ -4,11 +4,10 @@
 
   <ul class="playlist">
     <li *ngFor="let song of songs" 
-      (click)="player.play(song)" 
-      [class.playing]="song == playingSong">
+      [class.playing]="song === playingSong"
+      (click)="player.play(song); playingSong=song;" >
+      <button class="delete" (click)="deleteSong(song)">x</button>
       <a>{{song.name}}</a>
-      <button class="delete" title="delete song"
-      (click)="deleteSong(song)">x</button>
     </li>
   </ul>
 </div>

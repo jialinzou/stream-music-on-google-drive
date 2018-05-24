@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Song } from '../song';
-import { SONGS } from '../mock-songs';
+import { DriveService } from '../drive.service';
 
 @Component({
   selector: 'app-playlist',
@@ -13,16 +13,18 @@ export class PlaylistComponent implements OnInit {
   songs: Song[];
   playingSong: Song;
 
-  constructor() { }
+  constructor(private driveService: DriveService) { }
 
   ngOnInit() {
-    this.songs = SONGS;
+    this.driveService.getSongs().subscribe(
+      (songs) => this.songs = songs);
     this.player.play(this.songs[0]);
     this.playingSong = this.songs[0];
   }
 
   addSongs(): void {
-    this.songs.push.apply(this.songs, SONGS);
+    this.driveService.getSongs().subscribe(
+      (songs) => this.songs.push.apply(this.songs, songs));
   }
 
   deleteSong(song: Song): void {

@@ -1,4 +1,6 @@
-<button ng-hide="signed" id="authorize-button" (click)=handleAuthClick()>Authorize</button>
-<button ng-show="signed" id="signout-button" (click)=handleSignoutClick()>Sign Out</button>
+<button id="authorize-button" (click)=handleAuthClick()>Authorize</button>
+<button id="signout-button" (click)=handleSignoutClick()>Sign Out</button>
 
-<pre id="content"></pre>
+<div *ngFor='let message of messages'> {{message}} </div>
+
+<button *ngIf='messages.length' (click)="clearMsg()">clear messages</button>

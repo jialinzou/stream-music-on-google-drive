@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { Song } from '../song';
 import { DriveService } from '../drive.service';
 
@@ -12,14 +11,14 @@ export class PlaylistComponent implements OnInit {
   @ViewChild('player') player: any;
   songs: Song[];
   playingSong: Song;
-
   constructor(private driveService: DriveService) { }
 
   ngOnInit() {
-    this.driveService.getSongs().subscribe(
-      (songs) => this.songs = songs);
-    this.player.play(this.songs[0]);
-    this.playingSong = this.songs[0];
+    this.songs = [];
+    //this.driveService.getSongs().subscribe(
+    //  (songs) => this.songs = songs);
+    //this.player.play(this.songs[0]);
+    //this.playingSong = this.songs[0];
   }
 
   addSongs(): void {
@@ -36,8 +35,11 @@ export class PlaylistComponent implements OnInit {
     this.playingSong = this.songs[i];
     this.player.play(this.playingSong);
   }
-  //play(song: Song): void {
-  //  this.playingSong = song;
-  //  console.log(this.playingSong);
-  //}
+
+  getstatus(): void {
+    console.log(this.driveService.nextPageToken);
+    console.log(this.driveService.isSignIn);
+  }
+
+
 }

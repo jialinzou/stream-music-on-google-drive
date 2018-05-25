@@ -1,6 +1,6 @@
-<div>
+<div *ngIf='song'>
   <audio controls autoplay=true (ended)="onEnded()" #audioPlayer>
-    <source src={{song.link}}>
+    <source src={{song.webContentLink}}>
   Your browser does not support the audio element.
   </audio>
   <p>playing... {{song.name}}</p>

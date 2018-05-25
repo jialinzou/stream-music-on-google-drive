@@ -20,26 +20,16 @@ export class DriveComponent implements OnInit {
    *  Sign in the user upon button click.
    */
   handleAuthClick() {
-    this.sendMsg('signin');
+    this.sendMsg('comp request signin');
     this.driveService.handleAuthClick();
-    this.driveService.getSignInStatus().subscribe(
-      (status) => this.sendMsg(status));
-    this.driveService.getSignInStatus().subscribe(
-      (status) => this.isSignIn = status);
-    if (this.isSignIn) {
-      this.driveService.listFiles().subscribe(
-        (res)=>console.log(res));
-    }
   }
 
   /**
    *  Sign out the user upon button click.
    */
   handleSignoutClick() {
-    this.sendMsg('signout');
+    this.sendMsg('comp request signout');
     this.driveService.handleSignoutClick();
-    this.driveService.getSignInStatus().subscribe(
-      (status) => this.isSignIn = status);
   }
 
   sendMsg(message) {

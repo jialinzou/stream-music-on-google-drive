@@ -3,7 +3,6 @@ import { Observable, of, from} from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
 import { Song } from './song';
-import { SONGS } from './mock-songs';
 
 declare var gapi: any;
 
@@ -12,6 +11,7 @@ declare var gapi: any;
 })
 export class DriveService {
   isSignIn: boolean;
+  nextPageToken: string;
   constructor() {
     gapi.load('client:auth2', this.initClient.bind(this));
   }
@@ -26,11 +26,11 @@ export class DriveService {
       clientId: '171562641950-gnt54el5k5sdu02r4do0qt5aok56fd0h.apps.googleusercontent.com',
       discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
       scope: 'https://www.googleapis.com/auth/drive'
-    }).then(()=>{
-      this.getSignInStatus().subscribe(
-        (status) => this.isSignIn = status);
-      console.log(this.isSignIn);
-    });
+    }).then(this.updateSignInStatus.bind(this));
+  }
+
+  updateSignInStatus(): void {
+    this.isSignIn = gapi.auth2.getAuthInstance().isSignedIn.get();
   }
 
   getSignInStatus(): Observable<boolean> {
@@ -41,37 +41,28 @@ export class DriveService {
    *  Sign in the user upon button click.
    */
   handleAuthClick() {
-    gapi.auth2.getAuthInstance().signIn();
+    gapi.auth2.getAuthInstance().signIn().then(
+      this.updateSignInStatus.bind(this));
   }
 
   /**
    *  Sign out the user upon button click.
    */
   handleSignoutClick() {
-    gapi.auth2.getAuthInstance().signOut();
-  }
-
-  listFiles(): Observable<any>{
-    return from(gapi.client.drive.files.list({
-      'pageSize': 10,
-      'fields': "nextPageToken, files(id, name, webContentLink)"
-    })).pipe(pluck('result'));
-    /*.then(function(res){
-      console.log(res);
-    });
-    console.log(res);
-    let files = res.result.files;
-    if (files && files.length > 0) {
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        songs.push({'name': file.name, 'link':file.webContentLink });
-      }
-    } 
-    console.log(songs);
-    return of(songs);*/
+    gapi.auth2.getAuthInstance().signOut().then(
+      this.updateSignInStatus.bind(this));
   }
 
   getSongs(): Observable<Song[]> {
-    return of(SONGS);
+    let res: Observable<any> = from(gapi.client.drive.files.list({
+      'pageSize': 10,
+      'fields': "nextPageToken, files(id, name, webContentLink, viewedByMeTime)",
+      'q': "mimeType='audio/mpeg' and not name contains 'tlog'",
+      'orderBy': "viewedByMeTime",
+      'pageToken': this.nextPageToken
+    }));
+    res.pipe(pluck('result', 'nextPageToken')).subscribe(
+      (token: string)=>this.nextPageToken=token);
+    return res.pipe(pluck('result', 'files'));
   }
 }

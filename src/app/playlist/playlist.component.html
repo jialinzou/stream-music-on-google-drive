@@ -1,7 +1,8 @@
 <app-player #player (finished)="playRandomSong()"></app-player>
 <div>
   <button (click)="addSongs()">Add Songs</button>
-
+  <button (click)="getstatus()">test getstatus</button>
+  
   <ul class="playlist">
     <li *ngFor="let song of songs" 
       [class.playing]="song === playingSong"

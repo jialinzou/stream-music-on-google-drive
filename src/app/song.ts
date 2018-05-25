@@ -1,4 +1,5 @@
 export class Song {
-  link: string;
+  id: string;
+  webContentLink: string;
   name: string;
 }

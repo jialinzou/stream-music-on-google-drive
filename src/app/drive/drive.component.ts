@@ -11,6 +11,14 @@ export class DriveComponent implements OnInit {
   isSignIn: boolean;
   constructor(private driveService: DriveService) { 
     this.messages = [];
+    driveService.isSignIn.subscribe((res)=>{
+      if (res) {
+        this.sendMsg('Signed In');
+      } else {
+        this.sendMsg('Signed out');
+        console.log('Signed out');
+      }
+     })
   }
 
   ngOnInit() { 

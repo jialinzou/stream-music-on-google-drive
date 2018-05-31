@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable, of, from} from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ declare var gapi: any;
   providedIn: 'root'
 })
 export class DriveService {
-  isSignIn: boolean;
+  @Output() isSignIn: EventEmitter<boolean> = new EventEmitter<boolean>();
   nextPageToken: string;
   constructor() {
     gapi.load('client:auth2', this.initClient.bind(this));
@@ -30,11 +30,7 @@ export class DriveService {
   }
 
   updateSignInStatus(): void {
-    this.isSignIn = gapi.auth2.getAuthInstance().isSignedIn.get();
-  }
-
-  getSignInStatus(): Observable<boolean> {
-    return of(gapi.auth2.getAuthInstance().isSignedIn.get());
+    this.isSignIn.emit(gapi.auth2.getAuthInstance().isSignedIn.get());
   }
 
   /**

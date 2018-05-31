@@ -1,10 +1,10 @@
 <app-player #player (finished)="playRandomSong()"></app-player>
 <div>
   <button (click)="addSongs()">Add Songs</button>
-  <button (click)="getstatus()">test getstatus</button>
+  <button (click)="removeAllSongs()">Remove All Songs</button>
   
   <ul class="playlist">
-    <li *ngFor="let song of songs" 
+    <li *ngFor="let song of songs; trackBy index" 
       [class.playing]="song === playingSong"
       (click)="player.play(song); playingSong=song;" >
       <button class="delete" (click)="deleteSong(song)">x</button>

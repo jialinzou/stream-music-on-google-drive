@@ -1,8 +1,6 @@
-<div *ngIf='driveService.isSignIn'>Signed In</div>
-
 <button (click)=handleAuthClick()>Authorize</button>
 <button (click)=handleSignoutClick()>Sign Out</button>
 
-<div *ngFor='let message of messages'> {{message}} </div>
+<div *ngFor='let message of messages; trackBy index'> {{message}} </div>
 
 <button *ngIf='messages.length' (click)="clearMsg()">clear messages</button>

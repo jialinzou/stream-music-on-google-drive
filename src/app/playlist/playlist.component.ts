@@ -11,7 +11,11 @@ export class PlaylistComponent implements OnInit {
   @ViewChild('player') player: any;
   songs: Song[];
   playingSong: Song;
-  constructor(private driveService: DriveService) { }
+  constructor(private driveService: DriveService) {
+    driveService.isSignIn.subscribe((res)=>{
+      if (res) {
+        this.addSongs(); }})
+  }
 
   ngOnInit() {
     this.songs = [];
@@ -36,10 +40,7 @@ export class PlaylistComponent implements OnInit {
     this.player.play(this.playingSong);
   }
 
-  getstatus(): void {
-    console.log(this.driveService.nextPageToken);
-    console.log(this.driveService.isSignIn);
+  removeAllSongs() {
+    this.songs = [];
   }
-
-
 }

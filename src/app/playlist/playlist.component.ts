@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Song } from '../song';
 import { DriveService } from '../drive.service';
 
@@ -11,33 +11,34 @@ export class PlaylistComponent implements OnInit {
   @ViewChild('player') player: any;
   songs: Song[];
   playingSong: Song;
-  constructor(private driveService: DriveService) {
+  constructor(private driveService: DriveService, private ref: ChangeDetectorRef) {
+    this.songs = [];
     driveService.isSignIn.subscribe((res)=>{
       if (res) {
-        this.addSongs(); }})
+        this.addSongs();
+      } 
+    })
   }
 
-  ngOnInit() {
-    this.songs = [];
-    //this.driveService.getSongs().subscribe(
-    //  (songs) => this.songs = songs);
-    //this.player.play(this.songs[0]);
-    //this.playingSong = this.songs[0];
-  }
+  ngOnInit() { }
 
   addSongs(): void {
-    this.driveService.getSongs().subscribe(
-      (songs) => this.songs.push.apply(this.songs, songs));
+    this.driveService.getSongs().subscribe((songs) => {
+      this.songs.push.apply(this.songs, songs);
+      this.ref.detectChanges();
+      });
   }
 
   deleteSong(song: Song): void {
     this.songs = this.songs.filter(h => h !== song);
+    this.ref.detectChanges();
   }
 
   playRandomSong() {
     let i: number = Math.floor(Math.random() * this.songs.length);
     this.playingSong = this.songs[i];
     this.player.play(this.playingSong);
+    this.ref.detectChanges();
   }
 
   removeAllSongs() {

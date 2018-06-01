@@ -4,9 +4,9 @@
   <button (click)="removeAllSongs()">Remove All Songs</button>
   
   <ul class="playlist">
-    <li *ngFor="let song of songs; trackBy index" 
+    <li *ngFor="let song of songs" 
       [class.playing]="song === playingSong"
-      (click)="player.play(song); playingSong=song;" >
+      (click)="player.play(song); playingSong=song; ref.detectChanges();" >
       <button class="delete" (click)="deleteSong(song)">x</button>
       <a>{{song.name}}</a>
     </li>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DriveService } from '../drive.service'
 
 @Component({
@@ -9,14 +9,13 @@ import { DriveService } from '../drive.service'
 export class DriveComponent implements OnInit {
   messages: string[];
   isSignIn: boolean;
-  constructor(private driveService: DriveService) { 
+  constructor(private driveService: DriveService, private ref: ChangeDetectorRef) { 
     this.messages = [];
     driveService.isSignIn.subscribe((res)=>{
       if (res) {
         this.sendMsg('Signed In');
       } else {
         this.sendMsg('Signed out');
-        console.log('Signed out');
       }
      })
   }
@@ -42,6 +41,7 @@ export class DriveComponent implements OnInit {
 
   sendMsg(message) {
     this.messages.push(message);
+    this.ref.detectChanges();
   }
 
   clearMsg() {

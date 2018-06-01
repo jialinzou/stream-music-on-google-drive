@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Song } from '../song';
 @Component({
   selector: 'app-player',
@@ -10,7 +10,9 @@ export class PlayerComponent implements OnInit {
   @Output() finished = new EventEmitter<boolean>();
   song: Song;
 
-  constructor() {}
+  constructor(private ref: ChangeDetectorRef) {
+    this.song = {'webContentLink': '', 'id': '', 'name': ''};
+  }
 
   ngOnInit() {
   }
@@ -19,6 +21,7 @@ export class PlayerComponent implements OnInit {
     this.song = song;
     this.audioPlayer.nativeElement.load();
     this.audioPlayer.nativeElement.play();
+    this.ref.detectChanges();
   }
 
   onEnded() {

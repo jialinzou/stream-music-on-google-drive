@@ -61,4 +61,19 @@ export class DriveService {
       (token: string)=>this.nextPageToken=token);
     return res.pipe(pluck('result', 'files'));
   }
+
+  randomViewByMeTime(song: Song): void {
+    let rightNow = new Date().getTime();
+    let randTime = new Date(rightNow-1000*60*60*24*30*Math.random()).toISOString();
+    gapi.client.drive.files.update({
+      fileId: song.id,
+      resource: {
+        "viewedByMeTime": randTime
+      }
+    }).then(function(response){
+      if ('error' in response.result) {
+        console.log(response.result.error);
+      }
+    }); 
+  }
 }

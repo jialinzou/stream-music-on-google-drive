@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+
 import { Song } from '../song';
+
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
+
 export class PlayerComponent implements OnInit {
   @ViewChild('audioPlayer') audioPlayer: any;
   @Output() finished = new EventEmitter<boolean>();

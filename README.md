@@ -13,6 +13,8 @@ To use this player, you need to have MP3 files in your Google Drive(shared by ot
 
 I just lied. In fact fecthing files randomly is not supported by Google Drive API. This app fetchs the 10 MP3 files with oldest ViewByMeTime(a meta data of Google Drive File). When you play a song or remove a song from current playlist, this app will modify that song file's ViewByMeTime randomly(a random time in the past 30 days). So if you have a problem with modifying ViewByMeTime of your Google Drive files, you shouldn't use this app. Besides that this app doesn't do any modification to your files. 
 
+![screenshot](src/screenshot.png)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:8000/`. The app will automatically reload if you change any of the source files.

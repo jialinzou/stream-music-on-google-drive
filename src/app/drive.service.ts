@@ -10,6 +10,7 @@ declare var gapi: any;
   providedIn: 'root'
 })
 export class DriveService {
+  @Output() userEmail: EventEmitter<string> = new EventEmitter<string>();
   @Output() isSignIn: EventEmitter<boolean> = new EventEmitter<boolean>();
   nextPageToken: string;
   constructor() {
@@ -30,6 +31,8 @@ export class DriveService {
   }
 
   updateSignInStatus(): void {
+    this.userEmail.emit(
+      gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
     this.isSignIn.emit(gapi.auth2.getAuthInstance().isSignedIn.get());
   }
 

@@ -10,11 +10,15 @@ import { DriveService } from '../drive.service'
 
 export class DriveComponent implements OnInit {
   isSignIn: boolean;
+  userEmail: string;
   constructor(private driveService: DriveService, private ref: ChangeDetectorRef) { 
     driveService.isSignIn.subscribe((res)=>{
       this.isSignIn = res;
       ref.detectChanges();
     });
+    driveService.userEmail.subscribe((res)=>{
+      this.userEmail = res;
+    })
   }
 
   ngOnInit() { 

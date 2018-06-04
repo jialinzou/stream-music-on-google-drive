@@ -1,2 +1,5 @@
 <button *ngIf=!isSignIn (click)=driveService.handleAuthClick()>Authorize</button>
-<button *ngIf=isSignIn (click)=driveService.handleSignoutClick()>Sign Out</button>
+<div *ngIf=isSignIn>
+	<button (click)=driveService.handleSignoutClick()>Sign Out</button>
+	<span > From: {{userEmail}}</span>
+</div>

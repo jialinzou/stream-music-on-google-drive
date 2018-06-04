@@ -7,7 +7,7 @@ If you have a problem with modifying ViewByMeTime of your Google Drive files, yo
 
 ## Why and How
 
-Over the years, I've collected thousands of songs. Google Drive is a natual place to store all these MP3 files, since I need them being synced easily on all my devices. Then I just need a 'Google Drive Music Player'. https://github.com/gsuitedevs/drive-music-player is a really awsome one, but it dosen't work for my listening habits, eg. I like to shuffle play all my collected songs. So I was thinking why not build a music player myself.
+Over the years, I've collected thousands of songs. Google Drive is a natural place to store all these MP3 files, since I need them being synced easily on all my devices. Then I just need a 'Google Drive Music Player'. https://github.com/gsuitedevs/drive-music-player is a really awesome one, but it dosen't work for my listening habits, eg. I like to shuffle play all my collected songs. So I was thinking why not build a music player myself.
 
 To use this player, you need to have MP3 files in your Google Drive(shared by others also works). Everytime you hit 'Add Songs' button, it fetchs 10 songs from your Google Drive 'randomly'. 
 

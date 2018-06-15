@@ -13,8 +13,10 @@ export class DriveService {
   @Output() userEmail: EventEmitter<string> = new EventEmitter<string>();
   @Output() isSignIn: EventEmitter<boolean> = new EventEmitter<boolean>();
   nextPageToken: string;
+  modifiedSongs: Set<Song>;
   constructor() {
     gapi.load('client:auth2', this.initClient.bind(this));
+    this.modifiedSongs = new Set();
   }
 
   /**
@@ -66,17 +68,20 @@ export class DriveService {
   }
 
   randomViewByMeTime(song: Song): void {
-    let rightNow = new Date().getTime();
-    let randTime = new Date(rightNow-1000*60*60*24*30*Math.random()).toISOString();
-    gapi.client.drive.files.update({
-      fileId: song.id,
-      resource: {
-        "viewedByMeTime": randTime
-      }
-    }).then(function(response){
-      if ('error' in response.result) {
-        console.log(response.result.error);
-      }
-    }); 
+    if (!this.modifiedSongs.has(song)) {
+      this.modifiedSongs.add(song);
+      let rightNow = new Date().getTime();
+      let randTime = new Date(rightNow-1000*60*60*24*30*Math.random()).toISOString();
+      gapi.client.drive.files.update({
+        fileId: song.id,
+        resource: {
+          "viewedByMeTime": randTime
+        }
+      }).then(function(response){
+        if ('error' in response.result) {
+          console.log(response.result.error);
+        }
+      }); 
+    }
   }
 }

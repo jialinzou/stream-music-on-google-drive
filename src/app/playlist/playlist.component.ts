@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Title }     from '@angular/platform-browser';
 
 import { Song } from '../song';
 import { DriveService } from '../drive.service';
@@ -13,7 +14,7 @@ export class PlaylistComponent implements OnInit {
   @ViewChild('player') player: any;
   songs: Song[];
   playingSong: Song;
-  constructor(private driveService: DriveService, private ref: ChangeDetectorRef) {
+  constructor(private driveService: DriveService, private ref: ChangeDetectorRef, private titleService: Title) {
     this.songs = [];
     driveService.isSignIn.subscribe((res)=>{
       if (res) {
@@ -44,6 +45,7 @@ export class PlaylistComponent implements OnInit {
   playRandomSong() {
     let i: number = Math.floor(Math.random() * this.songs.length);
     this.playingSong = this.songs[i];
+    this.titleService.setTitle(this.playingSong.name);
     this.player.play(this.playingSong);
     this.ref.detectChanges();
   }

@@ -6,7 +6,7 @@
   <ul class="playlist">
     <li *ngFor="let song of songs" 
       [class.playing]="song === playingSong"
-      (click)="player.play(song); playingSong=song; ref.detectChanges();" >
+      (click)="player.play(song); playingSong=song; titleService.setTitle(playingSong.name); ref.detectChanges();" >
       <button class="delete" (click)="deleteSong(song)">x</button>
       <a>{{song.name}}</a>
     </li>
